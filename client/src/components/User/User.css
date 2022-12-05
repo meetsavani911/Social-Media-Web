@@ -1,0 +1,43 @@
+.User {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.User>div {
+    display: flex;
+    gap: 10px;
+}
+
+.userImage {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.name>span:nth-of-type(1) {
+    font-weight: bold;
+}
+
+.uc-button {
+    height: 2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 6rem;
+}
+.UnfollowButton{
+    border: 2px solid #1b74e4;
+    background: transparent;
+    color:#1b74e4
+}
