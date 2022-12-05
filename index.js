@@ -54,18 +54,36 @@ app.use(
 app.use(cors());
 
 dotenv.config();
+// --------------------------------
+// mongoose
+//     .connect(process.env.MONGO_DB, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     })
+//     .then(() =>
+//         app.listen(process.env.PORT||5000, () =>
+//             console.log(`listening on port ${process.env.PORT}`)
+//         )
+//     )
+//     .catch((error) => console.log(error));
+// change------------------------------------------------
+    const connectDB = async () => {
+        try {
+          const conn = await mongoose.connect(process.env.MONGO_DB);
+          console.log(`MongoDB Connected: ${conn.connection.host}`);
+        } catch (error) {
+          console.log(error);
+          process.exit(1);
+        }
+      }
 
-mongoose
-    .connect(process.env.MONGO_DB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+      connectDB().then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log("listening for requests on port-----");
+        })
     })
-    .then(() =>
-        app.listen(process.env.PORT||5000, () =>
-            console.log(`listening on port ${process.env.PORT}`)
-        )
-    )
-    .catch((error) => console.log(error));
+
+// change-------------------------^^^
 
 // usage of routes  <<<<<
 
