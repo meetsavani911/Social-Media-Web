@@ -16,6 +16,28 @@ const app = express();
 app.use(express.static('public'));
 app.use('images' , express.static("images"));
 
+// servin frontend -----ABHISHEK MAURYA youtube for deploye
+
+import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+
+
+app.get("*" , function(_, res){
+    res.sendFile(
+        path.join(__dirname, "./client/build/index.html"),
+        function(err){
+            res.status(500).send(err);
+        }
+    );
+});
+
 // middleware  <<<<<
 app.use(
     bodyParser.json({
@@ -39,7 +61,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() =>
-        app.listen(process.env.PORT, () =>
+        app.listen(process.env.PORT||5000, () =>
             console.log(`listening on port ${process.env.PORT}`)
         )
     )
